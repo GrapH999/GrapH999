@@ -1,0 +1,37 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# ควบคุมว่า workflow จะทำงานเมื่อใด
+on:
+  # ทริกเกอร์ workflow เมื่อมีการ push หรือ pull request ไปยัง branch "main" เท่านั้น
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # อนุญาตให้คุณรัน workflow นี้ด้วยตนเองจากแท็บ Actions
+  workflow_dispatch:
+
+# การรัน workflow ประกอบด้วยหนึ่งงานหรือมากกว่า ซึ่งสามารถรันตามลำดับหรือขนานกันได้
+jobs:
+  # workflow นี้มีงานเดียวชื่อ "build"
+  build:
+    # ประเภทของ runner ที่งานจะรันบน
+    runs-on: ubuntu-latest
+
+    # ขั้นตอนต่างๆ เป็นลำดับของงานที่จะถูกดำเนินการเป็นส่วนหนึ่งของงาน
+    steps:
+      # ดึง repository ของคุณภายใต้ $GITHUB_WORKSPACE เพื่อให้ job ของคุณสามารถเข้าถึงได้
+      - uses: actions/checkout@v4
+
+      # รันคำสั่งเดี่ยวโดยใช้ shell ของ runner
+      - name: ทักทาย
+        run: echo "Hello, world!"
+
+      # รันชุดคำสั่งโดยใช้ shell ของ runner
+      - name: คำแนะนำเพิ่มเติม
+        run: |
+          echo "เพิ่ม actions อื่นๆ เพื่อ build,"
+          echo "test และ deploy โปรเจกต์ของคุณ"
+
